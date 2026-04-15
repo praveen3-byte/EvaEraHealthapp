@@ -26,6 +26,7 @@ function startProcessing(){
     }
     S.psychiatricAlert=S.triage.some(function(t){return t.action==='psychiatric_alert';});
     saveResult();
+    if (typeof saveToSupabase === 'function') saveToSupabase();
     setTimeout(function(){showResults();},1500);
   },3000);
 }
@@ -115,7 +116,7 @@ function showResults(){
     html+='</div>';
   }
   html+='</div>';
-  // Positive Findings Summary for Patient
+  // ── Positive Findings Summary for Patient ──
   var a2=S.answers||{};
   var posFindings=[];
   // Lifestyle risks
@@ -156,7 +157,7 @@ function showResults(){
     html+='</div></div>';
   }
   html+='<div class="care-plan-section"><h3>Your Personalised Care Plan</h3><div class="section-sub">Based on your adaptive assessment — '+STEPS.length+' sections completed</div><div class="care-cards">';
-  // PRAKRITI/VIKRITI HELPER
+  // ── PRAKRITI/VIKRITI HELPER 
   // Used by every care card to personalise recommendations
   function _pk(){return (S.answers&&S.answers.prakriti)||'';}
   function _vk(){return (S.answers&&S.answers.vikriti)||'';}
